@@ -1,7 +1,5 @@
-newsquest
+=NewsQuest: A Choose Your Own Adventure for the News
 =========
-
-NewsQuest: A Choose Your Own Adventure for the News
 
 Full project documentation can be found on the wiki (https://github.com/slifty/newsquest/wiki).
 
@@ -10,23 +8,26 @@ This document explains how to set up the code.
 If you have any questions at all please don't be afraid to ask (check the wiki to find where to ask).
 
 =========
-
-Setting up the client and backend:
+==Installing
+===Setting up the client and backend
 
 1) Install Node.js (http://nodejs.org/)
+
 2) Install MongoDB (http://www.mongodb.org/)
+
 3) Install the Express module (http://expressjs.com/guide.html)
+
 4) Install the Jade module (https://github.com/visionmedia/jade#readme)
+
 5) Install the MongoDB module (http://www.mongodb.org/display/DOCS/node.JS)
 
 
 
-Setting up the brains and ARK (this will eventually be separated to its own project)
+===Setting up the brains and ARK (this will eventually be separated to its own project)
 
 
 =========
-
-Starting the server:
+==Starting the sSrver
 1) start the mongo daemon
 
 mongod
