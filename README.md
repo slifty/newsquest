@@ -16,18 +16,18 @@ Setting up the client and backend
 
 2. Install MongoDB (http://www.mongodb.org/)
 
-(NOTE for these steps you must be in the same directory as this README)
+3. Using a terminal, navigate to the the same directory as this README)
 
-3. Install the Express module (http://expressjs.com/guide.html)
+4. Install the Express module (http://expressjs.com/guide.html)
 
-4. Install the Jade module (https://github.com/visionmedia/jade#readme)
+5. Install the Jade module (https://github.com/visionmedia/jade#readme)
 
-5. Install the MongoDB module (http://www.mongodb.org/display/DOCS/node.JS)
+6. Install the MongoDB module (http://www.mongodb.org/display/DOCS/node.JS)
 
-6. Install the Mongoose module (http://mongoosejs.com/)
+7. Install the Mongoose module (http://mongoosejs.com/)
 
 
-===Setting up the brains and ARK (this will eventually be separated to its own project)
+Please note that the brains for this (question generation) exists in a separate repository, location TBD.
 
 Starting the Server
 -------------
