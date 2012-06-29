@@ -15,11 +15,15 @@ If you have any questions at all please don't be afraid to ask (check the wiki t
 
 2) Install MongoDB (http://www.mongodb.org/)
 
+(NOTE for these steps you must be in the same directory as this README)
+
 3) Install the Express module (http://expressjs.com/guide.html)
 
 4) Install the Jade module (https://github.com/visionmedia/jade#readme)
 
 5) Install the MongoDB module (http://www.mongodb.org/display/DOCS/node.JS)
+
+6) Install the Mongoose module (http://mongoosejs.com/)
 
 
 
@@ -27,7 +31,7 @@ If you have any questions at all please don't be afraid to ask (check the wiki t
 
 
 =========
-==Starting the sSrver
+==Starting the Server
 1) start the mongo daemon
 
 mongod
