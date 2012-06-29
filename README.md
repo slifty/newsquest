@@ -34,11 +34,11 @@ Starting the Server
 
 1. start the mongo daemon
 
-mongod
+    mongod
 
 2. start the node server
 
-node app.js
+    node app.js
 
 Licensing
 =============
