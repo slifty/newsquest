@@ -3,19 +3,24 @@
  * Module dependencies.
  */
 
-var express = require('express'),
+var config = require('./config'),
+	express = require('express'),
 	mongoose = require('mongoose'),
-	article_routes = require('./routes/articles.js'),
-	question_routes = require('./routes/questions.js'),
-	page_routes = require('./routes/pages.js'),
-	Article = require('./models/article.js'),
-	Question = require('./models/question.js'),
-	Event = require('./models/event.js');
+	article_routes = require('./routes/articles'),
+	question_routes = require('./routes/questions'),
+	page_routes = require('./routes/pages'),
+	Article = require('./models/article'),
+	Question = require('./models/question'),
+	Event = require('./models/event');
 
 var app = module.exports = express.createServer();
 
-// Configuration
+// Database Action
+mongoose.connect(config.mongo.base, function(err) {
+	if (err) throw err;
+});
 
+// Configuration
 app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
@@ -24,6 +29,7 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.static(__dirname + '/public'));
+	app.enable("jsonp callback");
 });
 
 app.configure('development', function(){
@@ -35,6 +41,7 @@ app.configure('production', function(){
 });
 
 
+
 // Pages
 app.get('/', page_routes.index);
 app.get('/about', page_routes.about);
@@ -43,18 +50,19 @@ app.get('/team', page_routes.team);
 
 
 // REST: Related Articles
-app.get('/api/article', article_routes.view); // View
+app.get('/api/article/:id', article_routes.view); // View
 app.get('/api/articles', article_routes.list); // List
 app.post('/api/articles', article_routes.create); // Add
-app.put('/api/article', article_routes.update); // Update
-app.delete('/api/article', article_routes.delete); // Delete
+app.post('/api/articles/:id', article_routes.create); // Load Related Articles
+app.put('/api/article/:id', article_routes.update); // Update
+app.delete('/api/article/:id', article_routes.delete); // Delete
 
 // REST: Questions
-app.get('/api/question', question_routes.view); // View
+app.get('/api/question/:id', question_routes.view); // View
 app.get('/api/questions', question_routes.list); // List
 app.post('/api/questions', question_routes.create); // Add
-app.put('/api/question', question_routes.update); // Update
-app.delete('/api/question', question_routes.delete); // Delete
+app.put('/api/question/:id', question_routes.update); // Update
+app.delete('/api/question/:id', question_routes.delete); // Delete
 
 app.listen(3000, function(){
 	console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

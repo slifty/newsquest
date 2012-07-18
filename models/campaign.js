@@ -2,13 +2,13 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	Mixed = Schema.Types.Mixed;
 
+var Article = require('./article');
 
 // Schema
-var Event = new Schema({
-	type : { type: String },
-	value : { type: Mixed },
-	timestamp : { type: Date },
-	object : { type: Mixed }
+var Campaign = new Schema({
+	title : { type: String },
+	articles : [Article.schema],
+	timestamp : { type: Date }
 });
 
 
@@ -27,6 +27,6 @@ Event.pre('remove', function(next) {
 
 
 // Exports
-mongoose.model('Event', Event);
+mongoose.model('Campaign', Event);
 exports.schema = Event;
-exports.schema = mongoose.model('Event');
+exports.model = mongoose.model('Campaign');

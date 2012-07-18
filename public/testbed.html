@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>Test Bed</title>
+	</head>
+	<body>
+		<h1>Create article via url</h1>
+		<form action="/api/articles" method="POST">
+			<ul>
+				<li><label for="l">url:</label><input name="l" id="l" type="text" value="http://slifty.com/2012/06/ten-months-at-the-globe/"/></li>
+				<li><input type="submit" /></li>
+			</ul>
+		</form>
+
+		<h1>Create article</h1>
+		<form action="/api/articles" method="POST">
+			<ul>
+				<li><label for="url">url:</label><input name="url" id="url" type="text" value="http://slifty.com/2012/06/ten-months-at-the-globe/"/></li>
+				<li><label for="title">title:</label><input name="title" id="title" type="text" value="This is a headline"/></li>
+				<li><label for="source">source:</label><input name="source" id="source" type="text" value="slifty.com"/></li>
+				<li><label for="body">body:</label><input name="body" id="body" type="text" value="This is an example of the article body"/></li>
+				<li><input type="submit" /></li>
+			</ul>
+		</form>
+		
+		<h1>Questions from</h1>
+		<form action="/api/questions" method="POST">
+			<ul>
+				<li><label for="a">article ID:</label><input name="a" id="a" type="text" value="500448448a40b74d28000002"/></li>
+				<li><input type="submit" /></li>
+			</ul>
+		</form>
+	</body>
+</html>

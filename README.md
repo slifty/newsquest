@@ -26,6 +26,11 @@ Setting up the client and backend
 
 7. Install the Mongoose module (http://mongoosejs.com/)
 
+8. Install the xml2js module (https://github.com/Leonidas-from-XIV/node-xml2js)
+
+9. Create a local config file
+		cp config.default.js config.js
+		vi config.js
 
 Please note that the brains for this (question generation) exists in a separate repository, location TBD.
 
