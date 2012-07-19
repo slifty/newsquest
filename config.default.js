@@ -9,11 +9,20 @@ config.web = {};
 config.web.port = process.env.WEB_PORT || 3000;
 
 config.api = {};
+config.api.daylife = {};
+config.api.daylife.accesskey = '';
+config.api.daylife.secret = '';
+
 config.api.extraction = {};
-config.api.extraction.host = '';
-config.api.extraction.path = '';
+config.api.extraction.host = 'newsquest.me';
+config.api.extraction.path = '/NYOA/api/article/info';
+
 config.api.questions = {};
-config.api.questions.host = '';
-config.api.questions.path = '';
+config.api.questions.host = 'newsquest.me';
+config.api.questions.path = '/NYOA/api/QuestionGeneration/questions';
+
+config.api.related = {}
+config.api.related.host = 'newsquest.me';
+config.api.related.path = '/NYOA/api/QuestionGeneration/questions';
 
 module.exports = config;
