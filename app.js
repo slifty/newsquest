@@ -43,7 +43,6 @@ app.configure('production', function(){
 
 
 // Pages
-app.get('/', page_routes.index);
 app.get('/about', page_routes.about);
 app.get('/demo', page_routes.demo);
 app.get('/team', page_routes.team);
