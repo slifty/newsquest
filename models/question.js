@@ -5,12 +5,12 @@ var Article = require('./article');
 
 // Schema
 var Question = new Schema({
-	article : { type: String },
-	question : { type: String },
-	answer : { type: String },
-	skip_count : { type: Number, min: 0 },
-	view_count : { type: Number, min: 0 },
-	weight : { type: Number }
+	article : { type: String, default: "" },
+	question : { type: String, default: "" },
+	answer : { type: String, default: "" },
+	skip_count : { type: Number, min: 0, default: 0 },
+	view_count : { type: Number, min: 0, default: 0 },
+	weight : { type: Number, default: 0}
 });
 
 

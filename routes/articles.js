@@ -3,7 +3,8 @@ var config = require('../config'),
 	xml = require('xml2js'),
 	url = require('url');
 
-var Article = require('../models/article').model,
+var ArticleHelper = require('../models/article'),
+	Article = ArticleHelper.model,
 	Question = require('../models/question').model,
 	Event = require('../models/event').model;
 
@@ -38,17 +39,18 @@ exports.create = function(req, res) {
 					parser.parseString(extract_xml, function (err, extract_obj) {
 						if(err)
 							res.json(err);
-						else if(extract_obj.title === undefined) {
-							console.log("Trying again");
-							if(extract_attempts < 5) extract();
+						else if(extract_obj.title === undefined || !(typeof extract_obj.text == "string")) {
+							console.log("Article lookup failed. Trying again (" + req.body.l + ")");
+							if(extract_attempts < 3) extract();
 							else res.json();
 						} else {
+							console.log("Got an article: " + req.body.l);
 							// Create the object
 							var article = new Article();
 							article.url = req.body.l;
 							article.title = extract_obj.title;
 							article.source = extract_obj.domain;
-							article.paragraphs = Article.splitParagraphs(extract_obj);
+							article.paragraphs = ArticleHelper.splitParagraphs(extract_obj.text);
 							article.save(function (err, article) {
 								if(err)
 									return res.json(err);
@@ -59,6 +61,7 @@ exports.create = function(req, res) {
 					});
 				});
 			});
+			extract_req.on('error', function(err) { res.json(err); });
 			extract_req.end();
 		};
 		extract();
@@ -80,7 +83,7 @@ exports.create = function(req, res) {
 		article.url = req.body["url"];
 		article.title = req.body["title"];
 		article.source = req.body["source"];
-		article.paragraphs = Article.splitParagraphs(req.body["body"]);
+		article.paragraphs = ArticleHelper.splitParagraphs(req.body["body"]);
 		article.save(function (err, article) {
 			if(err)
 				return res.json(err);
@@ -100,6 +103,7 @@ exports.delete = function(req, res) {
 
 exports.view = function(req, res) {
 	Article.findById(req.params["id"], function (err, article) {
+		if(article == null) return res.json();
 		res.json(article);
 	});
 };
@@ -114,6 +118,7 @@ exports.list = function(req, res) {
 		query.limit(limit);
 		query.skip(start);
 		query.exec(function (err, articles) {
+			if(articles == null) return res.json();
 			res.json(articles);
 		});
 	}

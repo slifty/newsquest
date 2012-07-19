@@ -5,21 +5,11 @@ var mongoose = require('mongoose'),
 var Question = require('./question');
 
 
-// Setters
-function cleanURL(u) {
-	var uo = url.parse(u);
-	return uo.protocol + "//" + uo.host + uo.path;
-}
-function splitParagraphs(text) {
-	return text.replace(/<br\s*\/?>/g,"\n").replace(/(\s*\n\s*)+/g,"\n").split(/\n/);
-}
-
-
 // Schema
 var Article = new Schema({
-	url : { type: String },
-	title : { type: String },
-	source : { type: String },
+	url : { type: String, default: ""},
+	title : { type: String, default: ""},
+	source : { type: String, default: ""},
 	meta: {
 		published : { type: Date },
 		author : { type: String },
@@ -44,9 +34,12 @@ Article.pre('remove', function(next) {
 });
 
 
+// Methods
+exports.splitParagraphs =  function(text) {
+	return text.replace(/<br\s*\/?>/g,"\n").replace(/(\s*\n\s*)+/g,"\n").split(/\n/);
+};
+
 // Exports
 mongoose.model('Article', Article);
 exports.schema = Article;
 exports.model = mongoose.model('Article');
-exports.cleanURL = cleanURL;
-exports.splitParagraphs = splitParagraphs;

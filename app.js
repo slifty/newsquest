@@ -62,6 +62,8 @@ app.get('/api/question/:id', question_routes.view); // View
 app.get('/api/questions', question_routes.list); // List
 app.post('/api/questions', question_routes.create); // Add
 app.put('/api/question/:id', question_routes.update); // Update
+app.put('/api/question/:id/view', question_routes.view); // Register a view
+app.put('/api/question/:id/skip', question_routes.skip); // Register a skip
 app.delete('/api/question/:id', question_routes.delete); // Delete
 
 app.listen(3000, function(){

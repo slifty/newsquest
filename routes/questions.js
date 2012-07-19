@@ -31,7 +31,7 @@ exports.create = function(req, res) {
 					'Content-Length': post_data.length
 				}
 			};
-			
+			console.log("Querying server for questions about " + article.url);
 			var questions_req = http.request(options, function(questions_res) {
 				questions_res.setEncoding('utf8');
 				
@@ -45,7 +45,8 @@ exports.create = function(req, res) {
 				});
 				questions_res.on('end', function () {
 					if(question_text == "") return res.json();
-						
+					console.log("Recieved questions about " + article.url);
+					
 					var questions = [];
 					var skipped_questions = 0;
 					var question_strings = question_text.split("\n");
@@ -71,10 +72,10 @@ exports.create = function(req, res) {
 								return res.json(questions);
 						});
 					}
-					
 				});
 			});
 			
+			questions_req.on('error', function(err) { res.json(err); });
   			questions_req.write(post_data);
 			questions_req.end();
 		});
@@ -104,13 +105,45 @@ exports.update = function(req, res) {
 	res.render('todo', { feature: 'Update Question' })
 };
 
+exports.view = function(req, res) {
+	Question.findById(req.params["id"], function (err, question) {
+		if(question == null) {
+			question.view_count++;
+			question.save(function (err, question) {
+				if(err)
+					return res.json(err);
+				else
+					return res.json(question);
+			});
+		} else {
+			return res.json();
+		}
+	});
+};
+
+exports.skip = function(req, res) {
+	Question.findById(req.params["id"], function (err, question) {
+		if(question == null) {
+			question.skip_count++;
+			question.save(function (err, question) {
+				if(err)
+					return res.json(err);
+				else
+					return res.json(question);
+			});
+		} else {
+			return res.json();
+		}
+	});
+};
+
 exports.delete = function(req, res) {
 	res.render('todo', { feature: 'Delete Question' })
 };
 
 exports.view = function(req, res) {
-	Question.findById(req.params["id"], function (err, question){
-		res.json(doc);
+	Question.findById(req.params["id"], function (err, question) {
+		res.json(question);
 	});
 };
 
