@@ -107,7 +107,8 @@ exports.update = function(req, res) {
 
 exports.view = function(req, res) {
 	Question.findById(req.params["id"], function (err, question) {
-		if(question == null) {
+		console.log("Using question " + req.params["id"]);
+		if(question != null) {
 			question.view_count++;
 			question.save(function (err, question) {
 				if(err)
@@ -123,7 +124,8 @@ exports.view = function(req, res) {
 
 exports.skip = function(req, res) {
 	Question.findById(req.params["id"], function (err, question) {
-		if(question == null) {
+		console.log("Skipping question " + req.params["id"]);
+		if(question != null) {
 			question.skip_count++;
 			question.save(function (err, question) {
 				if(err)
